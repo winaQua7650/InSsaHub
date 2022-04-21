@@ -1,8 +1,4 @@
-import { useParams } from "react-router-dom";
-
 function App() {
-  const { id } = useParams();
-  console.log(id);
   const duck = "/images/duck.gltf";
   // const fox = "/images/fox.gltf";
 

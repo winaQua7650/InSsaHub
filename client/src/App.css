@@ -1,11 +1,9 @@
 .App {
+  padding: 5vw;
   font-family: "Pretendard-Regular";
 }
 
 /* Landing HEADER */
-#header {
-  padding-top: 2vw;
-}
 .main {
   display: flex;
   justify-content: space-around;

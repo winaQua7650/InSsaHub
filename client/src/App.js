@@ -10,7 +10,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/aframe/:id" element={<Aframe />}></Route>
+          <Route path="/office" element={<Aframe />}></Route>
         </Routes>
       </div>
     </BrowserRouter>
