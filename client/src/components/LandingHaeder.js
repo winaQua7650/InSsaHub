@@ -16,7 +16,7 @@ function Header() {
             <br />
             어쩌고저쩌고어쩌고저쩌고어쩌고
           </div>
-          <Link to={"/aframe/:id"}>
+          <Link to={"/office"}>
             <button class="start-btn bttn-material-flat bttn-primary">
               시작하기
             </button>
