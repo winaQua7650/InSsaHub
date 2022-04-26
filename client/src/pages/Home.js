@@ -1,11 +1,8 @@
-import LandingHeader from "../components/LandingHaeder";
-import LandingFooter from "../components/LandingFooter";
+import Landing from "../components/Landing";
 const Home = () => {
   return (
     <div>
-      <LandingHeader></LandingHeader>
-      <LandingFooter></LandingFooter>
-      {/* id는 랜덤 값 */}
+      <Landing />
     </div>
   );
 };

@@ -1,10 +1,9 @@
 import "./App.css";
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Aframe from "./pages/Aframe";
+import Join from "./pages/Join";
 
-// App.js
 function App() {
   return (
     <BrowserRouter>
@@ -12,6 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/office" element={<Aframe />}></Route>
+          <Route path="/join" element={<Join />}></Route>
         </Routes>
       </div>
     </BrowserRouter>
