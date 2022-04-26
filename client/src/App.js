@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Aframe from "./pages/Aframe";
 
+// App.js
 function App() {
   return (
     <BrowserRouter>
