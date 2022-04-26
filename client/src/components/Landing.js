@@ -1,11 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import swal from "sweetalert";
 
 function Landing() {
   const testImg = "/images/test_img1.jpg";
   const testImg2 = "/images/test_img2.png";
   const testImg3 = "/images/test_img3.jpg";
+
+  let navigate = useNavigate();
+
+  const onClick = () => {
+    navigate("/join");
+  };
 
   return (
     <div id="landing">
@@ -22,9 +28,10 @@ function Landing() {
               <br />
               어쩌고저쩌고어쩌고저쩌고어쩌고
             </div>
-            <Link to={"/join"}>
-              <button class="start-btn bttn-material-flat">시작하기</button>
-            </Link>
+
+            <button class="start-btn bttn-material-flat" onClick={onClick}>
+              시작하기
+            </button>
           </div>
           <img className="test-img" src={testImg} alt="test1" />
         </div>
