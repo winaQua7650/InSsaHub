@@ -1,9 +1,18 @@
 .App {
-  padding: 5vw;
   font-family: "Pretendard-Regular";
+}
+a {
+  text-decoration: none;
+  color: #fff;
+}
+img {
+  display: block;
 }
 
 /* Landing HEADER */
+#landing {
+  padding: 5vw;
+}
 .main {
   display: flex;
   justify-content: space-around;
@@ -30,6 +39,7 @@
   height: 3vw;
   font-size: 1.5vw;
   background-color: #7190b5;
+  color: #fff;
 }
 
 /* Footer */
@@ -50,6 +60,91 @@
   height: 20vw;
   border-radius: 1vw;
 }
+
+#join {
+}
+.choose-text {
+  padding-top: 3vw;
+  text-align: center;
+  font-weight: 700;
+  font-size: 2vw;
+}
+.avatars {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+}
+
+.avatar-item {
+  border-radius: 1vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20vw;
+  height: 24vw;
+  margin: 1.5vw;
+  cursor: pointer;
+}
+.avatar-item .avatar-1 {
+  width: 17vw;
+  height: 16vw;
+  margin-bottom: 0.5vw;
+  margin-right: 2vw;
+}
+.avatar-item .avatar-2 {
+  width: 13vw;
+  height: 17vw;
+  margin-bottom: 0.5vw;
+}
+.avatar-item span {
+  display: block;
+  font-size: 2vw;
+  font-weight: 700;
+  margin-top: 0.5vw;
+  margin-bottom: 1vw;
+  text-align: center;
+}
+.avatar-item-off {
+  background-color: #ececec;
+}
+.avatar-item-on {
+  border: 5px solid #7190b5;
+  box-shadow: 5px 5px 10px rgb(141, 141, 141);
+}
+.input-div {
+  text-align: -webkit-center;
+}
+.join-input {
+  width: 42vw;
+  height: 3vw;
+  border: 3px solid #020202;
+  border-radius: 1vw;
+  font-size: 1.5vw;
+  text-align: center;
+  font-weight: 700;
+}
+.btn-div {
+  text-align: center;
+  margin-top: 2vw;
+}
+.go-btn {
+  width: 15vw;
+  height: 3vw;
+  font-size: 1.5vw;
+  background-color: #7190b5;
+  color: #fff;
+  border-radius: 0.5vw;
+  margin: 2vw auto;
+  display: block;
+}
+.error-message {
+  font-size: 1.5vw;
+  margin-top: 1vw;
+  color: tomato;
+}
+
 /* Font */
 @font-face {
   font-family: "Pretendard-Regular";
