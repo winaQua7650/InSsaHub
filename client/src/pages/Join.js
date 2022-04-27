@@ -24,7 +24,8 @@ function Join() {
   const clickAvatar = (avatar) => {
     setAvatar(avatar);
   };
-
+  const avatarSelect = avatar;
+  localStorage.setItem("avatarSelect", JSON.stringify(avatarSelect));
   // useForm에 담아놓을것들
   const {
     register,
