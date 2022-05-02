@@ -14,6 +14,8 @@
     <script src="https://cdn.jsdelivr.net/gh/IdeaSpaceVR/aframe-particle-system-component@master/dist/aframe-particle-system-component.min.js"></script>
     <script src="/js/spawn-in-circle.component.js"></script>
     <script src="/js/color-changer.component.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
     <script>
       NAF.schemas.getComponentsOriginal = NAF.schemas.getComponents;
@@ -152,55 +154,19 @@
       <a-entity
         id="player"
         networked="template:#avatar-template;attachTemplateToLocal:false;"
-        camera
         position="0 2 0"
         spawn-in-circle="radius:3"
-        wasd-controls
         look-controls
+        movement-controls="fly: true; speed: 0.9"
       >
-        <a-sphere class="head" visible="false" random-color></a-sphere>
+        <a-entity camera look-controls></a-entity>
       </a-entity>
 
       <a-entity
         id="sphere"
         networked="template:#sphere-template;networkId:sphere;persistent:true;owner:scene"
       ></a-entity>
-
-      <a-entity
-        position="0 0 0"
-        geometry="primitive: plane; width: 10000; height: 10000;"
-        rotation="-90 0 0"
-        material="src: #grid; repeat: 10000 10000; transparent: true; metalness:0.6; roughness: 0.4; sphericalEnvMap: #sky;"
-      ></a-entity>
     </a-scene>
-
-    <style>
-      .github-corner:hover .octo-arm {
-        animation: octocat-wave 560ms ease-in-out;
-      }
-      @keyframes octocat-wave {
-        0%,
-        100% {
-          transform: rotate(0);
-        }
-        20%,
-        60% {
-          transform: rotate(-25deg);
-        }
-        40%,
-        80% {
-          transform: rotate(10deg);
-        }
-      }
-      @media (max-width: 500px) {
-        .github-corner:hover .octo-arm {
-          animation: none;
-        }
-        .github-corner .octo-arm {
-          animation: octocat-wave 560ms ease-in-out;
-        }
-      }
-    </style>
 
     <div class="actions">
       <button id="mic-btn" type="button" class="button">Mute Mic</button>
@@ -263,6 +229,28 @@
             evt.detail.networkId
           );
         });
+      }
+    </script>
+    <script>
+      document.addEventListener("keydown", flytoggle, false);
+      function flytoggle(e) {
+        if (e.keyCode === 71) {
+          if (
+            document.getElementById("player").getAttribute("movement-controls")
+              .fly == true
+          ) {
+            console.log("비행비활성화");
+            document
+              .getElementById("player")
+              .setAttribute("movement-controls", "fly: false; speed: 0.9");
+            document.getElementById("player").setAttribute("position", "0 2 0");
+          } else {
+            console.log("비행활성화");
+            document
+              .getElementById("player")
+              .setAttribute("movement-controls", "fly: true; speed: 0.9");
+          }
+        }
       }
     </script>
   </body>
