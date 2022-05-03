@@ -52,7 +52,8 @@ $().ready(function () {
             );
           }
           localStorage.setItem("nickname", data);
-          location.href = "./inssa.html";
+          // inssa.html로 넘어감
+            location.href = "./inssa.html"
         } else {
           return "영어 혹은 숫자로 이루어진 3글자 이상 6글자 이하의 닉네임을 설정해주세요.";
         }
