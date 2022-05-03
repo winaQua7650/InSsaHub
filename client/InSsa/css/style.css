@@ -28,3 +28,7 @@
   font-family: monospace;
   color: white;
 }
+
+#main-scene {
+  visibility: hidden;
+}

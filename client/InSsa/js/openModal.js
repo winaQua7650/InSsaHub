@@ -37,9 +37,6 @@ $().ready(function () {
         var checkNickname = /^[a-zA-Z0-9]{3,6}$/;
 
         if (checkNickname.test(data)) {
-          console.log(document.getElementById("spongeBob").checked);
-          console.log(document.getElementById("star").checked);
-          console.log(data);
           if (document.getElementById("spongeBob").checked) {
             localStorage.setItem(
               "avatar",
@@ -52,7 +49,8 @@ $().ready(function () {
             );
           }
           localStorage.setItem("nickname", data);
-          location.href = "./inssa.html";
+          // inssa.html로 넘어감
+            location.href = "./inssa.html"
         } else {
           return "영어 혹은 숫자로 이루어진 3글자 이상 6글자 이하의 닉네임을 설정해주세요.";
         }
