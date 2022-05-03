@@ -7,22 +7,22 @@ $().ready(function () {
       html: `
       <div>
         <div>
-          <img src="./img/sponge.png" class="avartar1" width="300px"/>
-          <img src="./img/star.webp" class="avartar2" width="300px" />
+          <img src="./img/fox.png" class="avartar1" width="300px" height="300px"/>
+          <img src="./img/duck.png" class="avartar2" width="300px" height="300px"/>
           <br>
           <input 
             type="radio" 
-            id="spongeBob" 
+            id="fox" 
             name="chk_info" 
-            value="spongeBob" 
+            value="fox" 
             checked>
-          spongeBob
+          여우
           <input 
             type="radio" 
-            id="star" 
+            id="duck" 
             name="chk_info" 
-            value="star">
-          star
+            value="duck">
+          오리
         </div>
       </div>
       `,
@@ -37,18 +37,18 @@ $().ready(function () {
         var checkNickname = /^[a-zA-Z0-9]{3,6}$/;
 
         if (checkNickname.test(data)) {
-          console.log(document.getElementById("spongeBob").checked);
-          console.log(document.getElementById("star").checked);
+          console.log(document.getElementById("fox").checked);
+          console.log(document.getElementById("duck").checked);
           console.log(data);
-          if (document.getElementById("spongeBob").checked) {
+          if (document.getElementById("fox").checked) {
             localStorage.setItem(
               "avatar",
-              document.getElementById("spongeBob").value
+              document.getElementById("fox").value
             );
           } else {
             localStorage.setItem(
               "avatar",
-              document.getElementById("star").value
+              document.getElementById("duck").value
             );
           }
           localStorage.setItem("nickname", data);
