@@ -1,0 +1,26 @@
+#loaing {
+  visibility: visible;
+}
+
+#loading .loading-text {
+  font-size: 2vw;
+  text-align: center;
+  font-weight: 700;
+}
+
+#loading .loading-spinner {
+  width: 20vw;
+  margin: 8vw auto;
+  display: block;
+}
+.spinner {
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

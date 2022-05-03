@@ -1,10 +1,8 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
+// Global vars and functions
+require('./NafIndex.js');
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+// Network components
+require('./components/networked-scene');
+require('./components/networked');
+require('./components/networked-audio-source');
+require('./components/networked-video-source');

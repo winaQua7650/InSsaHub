@@ -1,0 +1,70 @@
+/* 사용하는 글꼴 */
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* 전체 글꼴 설정 및 기본 margin 삭제 */
+body {
+  font-family: "Pretendard-Regular";
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+#landing {
+  padding: 5vw;
+}
+.main {
+  display: flex;
+  justify-content: space-around;
+}
+.main .main-text .header-text {
+  font-size: 3vw;
+  font-weight: 700;
+}
+.main .main-text .description-text {
+  padding-top: 3vw;
+  width: 40vw;
+  height: 10vw;
+  font-size: 1.5vw;
+  line-height: 1.4;
+}
+.main .test-img {
+  width: 30vw;
+  height: 20vw;
+  display: block;
+  border-radius: 1vw;
+}
+.main .main-text .start-btn {
+  width: 15vw;
+  height: 3vw;
+  font-size: 1.5vw;
+  background-color: #7190b5;
+  color: #fff;
+}
+
+/* Footer */
+#footer {
+  position: relative;
+  top: 4vw;
+}
+.footer-img {
+  display: flex;
+  justify-content: space-around;
+}
+.footer-img .test-img2 {
+  width: 40vw;
+  height: 20vw;
+}
+.footer-img .test-img3 {
+  width: 35vw;
+  height: 20vw;
+  border-radius: 1vw;
+}
