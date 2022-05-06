@@ -25,7 +25,7 @@
       var avatar = localStorage.getItem("avatar");
       NAF.schemas.getComponents = (template) => {
         if (!NAF.schemas.hasTemplate("#avatar-template2")) {
-          if (avatar === "fox") {
+          if (avatar === "dove") {
             document
               .querySelector("#player")
               .setAttribute(
@@ -44,7 +44,7 @@
                 },
               ],
             });
-          } else if (avatar === "duck") {
+          } else if (avatar === "mallardDuck") {
             document
               .querySelector("#player")
               .setAttribute(
@@ -120,7 +120,7 @@
           <a-entity class="avatar" networked-audio-source>
             <a-gltf-model
               id="myAvatar"
-              src="./assets/gltf/duck.gltf"
+              src="./assets/gltf/mallardDuck.gltf"
               visible="true"
             ></a-gltf-model>
             <a-text
@@ -142,7 +142,7 @@
           <a-entity class="avatar" networked-audio-source>
             <a-gltf-model
               id="myAvatar"
-              src="./assets/gltf/fox.gltf"
+              src="./assets/gltf/dove.gltf"
               visible="true"
             ></a-gltf-model>
             <a-text
