@@ -16,13 +16,13 @@ $().ready(function () {
             name="chk_info" 
             value="dove" 
             checked>
-          여우
+          구둘기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          
           <input 
             type="radio" 
             id="mallardDuck" 
             name="chk_info" 
             value="mallardDuck">
-          오리
+          썬더독
         </div>
       </div>
       `,
@@ -53,7 +53,7 @@ $().ready(function () {
           }
           localStorage.setItem("nickname", data);
           // inssa.html로 넘어감
-            location.href = "./inssa.html"
+          location.href = "./inssa.html";
         } else {
           return "영어 혹은 숫자로 이루어진 3글자 이상 6글자 이하의 닉네임을 설정해주세요.";
         }
