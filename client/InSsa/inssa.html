@@ -13,7 +13,7 @@
     <script src="/dist/networked-aframe.js"></script>
     <!-- aframe-color-random -->
     <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/gh/IdeaSpaceVR/aframe-particle-system-component@master/dist/aframe-particle-system-component.min.js"></script>
     <script src="/js/spawn-in-circle.component.js"></script>
 
@@ -90,20 +90,23 @@
       };
 
       // Aframe 컴포넌트 등록되어있는거 가져오기
-      AFRAME.registerComponent('glow', {
+      AFRAME.registerComponent("glow", {
         schema: {
           color: {
-            default: '#ffffff',
-            type: 'color'
+            default: "#ffffff",
+            type: "color",
           },
           intensity: {
-            default: 1.0
-          }
+            default: 1.0,
+          },
         },
         init: function () {
-          this.el.addEventListener('object3dset', function () {
-            this.update();
-          }.bind(this));
+          this.el.addEventListener(
+            "object3dset",
+            function () {
+              this.update();
+            }.bind(this)
+          );
         },
         update: function () {
           var data = this.data;
@@ -113,40 +116,39 @@
               node.material.emissiveIntensity = data.intensity;
             }
           });
-        }
+        },
       });
 
       /**
        * Simple spin-and-levitate animation.
        */
-      AFRAME.registerComponent('levitate', {
+      AFRAME.registerComponent("levitate", {
         tick: function (t, dt) {
-          var mesh = this.el.getObject3D('mesh');
+          var mesh = this.el.getObject3D("mesh");
           if (!mesh) return;
-          mesh.rotation.y += 0.1 * dt / 1000;
+          mesh.rotation.y += (0.1 * dt) / 1000;
           mesh.position.y = 0.25 * Math.sin(t / 1000);
-        }
+        },
       });
 
       /**
        * Removes current element if on a mobile device.
        */
-      AFRAME.registerComponent('not-mobile', {
+      AFRAME.registerComponent("not-mobile", {
         init: function () {
           var el = this.el;
           if (el.sceneEl.isMobile) {
             el.parentEl.remove(el);
           }
-        }
+        },
       });
     </script>
   </head>
 
-  
   <body>
     <!-- 로딩스피너 -->
     <div id="loading">
-      <img class="loading-spinner" src="./img/loader.gif" alt="loader">
+      <img class="loading-spinner" src="./img/loader.gif" alt="loader" />
       <div class="loading-text">로딩중입니다, 잠시만 기다려주세요...</div>
     </div>
 
@@ -167,16 +169,6 @@
         <a-asset-item id="navmesh" src="./assets/gltf/navmesh.glb"></a-asset-item>
         <a-asset-item id="house" src="./assets/gltf/house.glb"></a-asset-item>
       </a-assets>
-
-      <!-- 상호작용 공 -->
-      <template id="sphere-template">
-        <a-entity
-          class="raycastable"
-          geometry="primitive: sphere"
-          material="color: red"
-          color-changer
-        ></a-entity>
-      </template>
 
       <!-- 상호작용 entity -->
       <a-entity
@@ -212,41 +204,52 @@
       </template>
 
       <!-- Player entity. -->
-      <a-entity id="player"
-      look-controls
+      <a-entity 
+        id="player"
+        look-controls
         networked="template:#avatar-template;attachTemplateToLocal:false;"
-        movement-controls="constrainToNavMesh: true;
-                            controls: checkpoint, gamepad, trackpad, keyboard, touch;"
+        movement-controls="
+        fly:false;
+        constrainToNavMesh: true;
+        controls: checkpoint, gamepad, trackpad, keyboard, touch;"
                             >
-        <a-entity camera
-                  position="0 5.6 0">
+        <a-entity 
+          id="cam"
+          camera
+          position="0 5.6 0">
         </a-entity>
       </a-entity>
 
       <!-- Nav mesh. -->
-      <a-entity nav-mesh
-                normal-material
-                visible="false"
-                gltf-model="#navmesh"></a-entity>
+      <a-entity
+        nav-mesh
+        normal-material
+        visible="false"
+        gltf-model="#navmesh"
+      ></a-entity>
 
       <!-- Scene. -->
       <a-entity position="0 0 0"
                 gltf-model="#house">
       </a-entity>
 
-        <!-- Templates -->
-      
+      <!-- Templates -->
     </a-scene>
 
     <div class="actions">
       <button id="mic-btn" type="button" class="button">Mute Mic</button>
+      <button id="fly-btn" type="button" class="button">Fly Off</button>
     </div>
 
     <script>
       // Mic status
       let micEnabled = true;
+      // Fly status
+      let flyEnabled = false;
       // Mic button ele
       const micBtnEle = document.getElementById("mic-btn");
+      // Fly button ele
+      const flyBtnEle = document.getElementById("fly-btn");
       // On mobile remove elements that are resource heavy
       const isMobile = AFRAME.utils.device.isMobile();
 
@@ -302,28 +305,35 @@
       }
     </script>
     <script>
-      document.addEventListener("keydown", flytoggle, false);
-      function flytoggle(e) {
-        if (e.keyCode === 71) {
-          if (
-            document.getElementById("player").getAttribute("movement-controls")
-              .fly == true
-          ) {
-            console.log("비행비활성화");
-            document
-              .getElementById("player")
-              .setAttribute("movement-controls", "fly: false; speed: 0.9");
-            document.getElementById("cam").setAttribute("rotation", "0 0 0");
-            document.getElementById("player").setAttribute("position", "0 2 0");
-            document.getElementById("player").setAttribute("rotation", "0 0 0");
-          } else {
-            console.log("비행활성화");
-            document
-              .getElementById("player")
-              .setAttribute("movement-controls", "fly: true; speed: 0.9");
-          }
+      // 비행활성화 / 비활성화
+      flyBtnEle.addEventListener("click", function () {
+        if (
+          document.getElementById("player").getAttribute("movement-controls")
+            .fly == true
+        ) {
+          console.log("비행비활성화");
+          flyBtnEle.textContent = "Fly Off";
+          document
+            .getElementById("player")
+            .setAttribute(
+              "movement-controls",
+              "fly:false;constrainToNavMesh: true;controls: checkpoint, gamepad, trackpad, keyboard, touch;"
+            );
+          document.getElementById("player").setAttribute("position", "-7 0 1");
+        } else {
+          console.log("비행활성화");
+          flyBtnEle.textContent = "Fly On";
+          document
+            .getElementById("player")
+            .setAttribute(
+              "movement-controls",
+              "fly:true;constrainToNavMesh: false;controls: checkpoint, gamepad, trackpad, keyboard, touch;"
+            );
+          console.log(document.querySelector("#avatar-template2").innerHTML);
+          document.querySelector("#avatar-template2").innerHTML =
+            "<a-entity class='avatar' networked-audio-source='' scale='0.3 0.3 0.3'> <a-gltf-model id='myAvatar' src='./assets/gltf/dove.gltf' visible='true' animation-mixer='clip:fly'></a-gltf-model></a-entity>";
         }
-      }
+      });
     </script>
   </body>
 </html>
