@@ -7,8 +7,6 @@
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     <!-- socket -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.4.0/socket.io.slim.js"></script>
-    <!-- aframe-environment -->
-    <script src="https://unpkg.com/aframe-environment-component@1.3.0/dist/aframe-environment-component.min.js"></script>
     <!-- easyrtc -->
     <script src="/easyrtc/easyrtc.js"></script>
     <!-- networked-aframe -->
@@ -162,16 +160,12 @@
       audio: true;
     "
       cursor="rayOrigin: mouse"
-      raycaster="objects:.raycastable"
-      environment="preset: forest; lighting: point; lightPosition: -5 10 0;"
-    >
-      <!-- 건축물 -->
+      raycaster="objects:.raycastable">
+      <!-- 메인 배경 -->
       <a-assets>
-        <a-asset-item id="navmesh" src="./assets/gltf/Castle-navmesh.glb"></a-asset-item>
-        <a-asset-item id="castle" src="./assets/gltf/Castle.glb"></a-asset-item>
-
-        <!-- 보석 모양 glb -->
-        <!-- <a-asset-item id="gem" src="./assets/gltf/rupee.glb"></a-asset-item> -->
+        <!-- navmesh -->
+        <a-asset-item id="navmesh" src="./assets/gltf/navmesh.glb"></a-asset-item>
+        <a-asset-item id="house" src="./assets/gltf/house.glb"></a-asset-item>
       </a-assets>
 
       <!-- 상호작용 공 -->
@@ -193,12 +187,13 @@
       <!-- Player1. -->
 
       <template id="avatar-template">
-        <a-entity class="avatar" networked-audio-source \
-        scale="0.3 0.3 0.3">
+        <a-entity class="avatar" 
+        networked-audio-source>
           <a-gltf-model
             id="myAvatar"
             src="./assets/gltf/mallardDuck.gltf"
             visible="true"
+            scale="1 1 1"
           ></a-gltf-model>
 
         </a-entity>
@@ -206,12 +201,12 @@
 
        <!-- Player2. -->
       <template id="avatar-template2">
-        <a-entity class="avatar" networked-audio-source 
-        scale="0.3 0.3 0.3">
+        <a-entity class="avatar" networked-audio-source >
           <a-gltf-model
             id="myAvatar"
             src="./assets/gltf/dove.gltf"
             visible="true"
+            scale="1 1 1"
           ></a-gltf-model>
         </a-entity>
       </template>
@@ -222,36 +217,11 @@
         networked="template:#avatar-template;attachTemplateToLocal:false;"
         movement-controls="constrainToNavMesh: true;
                             controls: checkpoint, gamepad, trackpad, keyboard, touch;"
-                            
-                position="-7 0 1">
+                            >
         <a-entity camera
-                  position="0 1.6 0"
-                  look-controls="pointerLockEnabled: false">
-          <a-cursor></a-cursor>
+                  position="0 5.6 0">
         </a-entity>
       </a-entity>
-
-      <!-- 텔레포트 -->
-
-      <!-- Teleport gems. -->
-      <!-- <a-entity id="wall-gem"
-                checkpoint="offset: 0 -0.8 0;"
-                position="-9 7 -6"
-                gltf-model="#gem"
-                scale="0.05 0.05 0.05"
-                glow="color: #33FF66; intensity: 0.5"
-                levitate>
-        <a-light not-mobile type="point" intensity="0.5" color="#33FF66" distance="2" position="0.5 -0.25 0"></a-light>
-      </a-entity>
-      <a-entity id="tower-gem"
-                checkpoint="offset: 0 -0.8 0;"
-                position="0 10.2 -3.5"
-                gltf-model="#gem"
-                scale="0.05 0.05 0.05"
-                glow="color: #33FF66; intensity: 0.5"
-                levitate>
-        <a-light not-mobile type="point" intensity="0.5" color="#33FF66" distance="2" position="0.5 -0.25 0"></a-light>
-      </a-entity> -->
 
       <!-- Nav mesh. -->
       <a-entity nav-mesh
@@ -261,8 +231,7 @@
 
       <!-- Scene. -->
       <a-entity position="0 0 0"
-                scale="3 3 3"
-                gltf-model="#castle">
+                gltf-model="#house">
       </a-entity>
 
         <!-- Templates -->
