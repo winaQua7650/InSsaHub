@@ -162,11 +162,15 @@
       audio: true;
     "
       cursor="rayOrigin: mouse"
-      raycaster="objects:.raycastable">
+      raycaster="objects:.raycastable"
+    >
       <!-- 메인 배경 -->
       <a-assets>
         <!-- navmesh -->
-        <a-asset-item id="navmesh" src="./assets/gltf/navmesh.glb"></a-asset-item>
+        <a-asset-item
+          id="navmesh"
+          src="./assets/gltf/navmesh.glb"
+        ></a-asset-item>
         <a-asset-item id="house" src="./assets/gltf/house.glb"></a-asset-item>
       </a-assets>
 
@@ -175,25 +179,23 @@
         id="sphere"
         networked="template:#sphere-template;networkId:sphere;persistent:true;owner:scene"
       ></a-entity>
-     
+
       <!-- Player1. -->
 
       <template id="avatar-template">
-        <a-entity class="avatar" 
-        networked-audio-source>
+        <a-entity class="avatar" networked-audio-source>
           <a-gltf-model
             id="myAvatar"
             src="./assets/gltf/mallardDuck.gltf"
             visible="true"
             scale="1 1 1"
           ></a-gltf-model>
-
         </a-entity>
       </template>
 
-       <!-- Player2. -->
+      <!-- Player2. -->
       <template id="avatar-template2">
-        <a-entity class="avatar" networked-audio-source >
+        <a-entity class="avatar" networked-audio-source>
           <a-gltf-model
             id="myAvatar"
             src="./assets/gltf/dove.gltf"
@@ -204,7 +206,7 @@
       </template>
 
       <!-- Player entity. -->
-      <a-entity 
+      <a-entity
         id="player"
         look-controls
         networked="template:#avatar-template;attachTemplateToLocal:false;"
@@ -212,12 +214,8 @@
         fly:false;
         constrainToNavMesh: true;
         controls: checkpoint, gamepad, trackpad, keyboard, touch;"
-                            >
-        <a-entity 
-          id="cam"
-          camera
-          position="0 5.6 0">
-        </a-entity>
+      >
+        <a-entity id="cam" camera position="0 5.6 0"> </a-entity>
       </a-entity>
 
       <!-- Nav mesh. -->
@@ -229,9 +227,7 @@
       ></a-entity>
 
       <!-- Scene. -->
-      <a-entity position="0 0 0"
-                gltf-model="#house">
-      </a-entity>
+      <a-entity position="0 0 0" gltf-model="#house"> </a-entity>
 
       <!-- Templates -->
     </a-scene>
@@ -312,7 +308,7 @@
             .fly == true
         ) {
           console.log("비행비활성화");
-          flyBtnEle.textContent = "Fly Off";
+          flyBtnEle.textContent = "Fly On";
           document
             .getElementById("player")
             .setAttribute(
@@ -322,7 +318,7 @@
           document.getElementById("player").setAttribute("position", "-7 0 1");
         } else {
           console.log("비행활성화");
-          flyBtnEle.textContent = "Fly On";
+          flyBtnEle.textContent = "Fly Off";
           document
             .getElementById("player")
             .setAttribute(
