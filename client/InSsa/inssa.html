@@ -180,6 +180,15 @@
         networked="template:#sphere-template;networkId:sphere;persistent:true;owner:scene"
       ></a-entity>
 
+      <!-- 상호작용 공 -->
+      <template id="sphere-template">
+        <a-entity
+          class="raycastable"
+          geometry="primitive: sphere"
+          material="color: red"
+          color-changer
+        ></a-entity>
+      </template>
       <!-- Player1. -->
 
       <template id="avatar-template">
