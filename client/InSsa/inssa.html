@@ -87,6 +87,10 @@
             ],
           });
         }
+        NAF.schemas.add({
+          template: "screen-template",
+          components: ["position"],
+        });
         const components = NAF.schemas.getComponentsOriginal(template);
         return components;
       };
@@ -162,6 +166,7 @@
       debug: true;
       adapter: easyrtc;
       audio: true;
+      video : true;
     "
       cursor="rayOrigin: mouse"
       raycaster="objects:.raycastable"
@@ -207,8 +212,17 @@
             ></a-gltf-model>
           </a-entity>
         </template>
-        <!-- 보석 모양 glb -->
-        <!-- <a-asset-item id="gem" src="./assets/gltf/rupee.glb"></a-asset-item> -->
+
+        <template id="screen-template">
+          <a-plane
+            id="screen-plane"
+            width="12"
+            height="9"
+            position="0 7 -0.001"
+            material="side: back"
+            networked-video-source="streamName: screen"
+          ></a-plane>
+        </template>
       </a-assets>
 
       <!-- 상호작용 entity -->
@@ -217,6 +231,10 @@
         networked="template:#sphere-template;networkId:sphere;persistent:true;owner:scene"
       ></a-entity>
 
+      <a-entity
+        networked="template:#screen-template;attachTemplateToLocal:false"
+        visible="false"
+      ></a-entity>
       <!-- Player entity. -->
       <a-entity
         id="player"
@@ -248,6 +266,7 @@
 
     <div class="actions">
       <button id="mic-btn" type="button" class="button">Mute Mic</button>
+      <button id="screen-btn" type="button" class="button">Share screen</button>
       <button id="fly-btn" type="button" class="button">Fly Off</button>
     </div>
 
@@ -256,10 +275,16 @@
       let micEnabled = true;
       // Fly status
       let flyEnabled = false;
+      // Screen share status
+      let screenEnabled = false;
+
       // Mic button ele
       const micBtnEle = document.getElementById("mic-btn");
       // Fly button ele
       const flyBtnEle = document.getElementById("fly-btn");
+      // Screen share button element
+      const screenBtnEle = document.getElementById("screen-btn");
+
       // On mobile remove elements that are resource heavy
       const isMobile = AFRAME.utils.device.isMobile();
 
@@ -281,6 +306,21 @@
           NAF.connection.adapter.enableMicrophone(!micEnabled);
           micEnabled = !micEnabled;
           micBtnEle.textContent = micEnabled ? "Mute Mic" : "Unmute Mic";
+        });
+
+        // Handle screen button click (Off and On)
+        screenBtnEle.addEventListener("click", function () {
+          if (screenEnabled) {
+            NAF.connection.adapter.removeLocalMediaStream("screen");
+            screenEnabled = false;
+            screenBtnEle.textContent = "Share Screen";
+          } else {
+            navigator.mediaDevices.getDisplayMedia().then((stream) => {
+              NAF.connection.adapter.addLocalMediaStream(stream, "screen");
+              screenEnabled = true;
+              screenBtnEle.textContent = "Stop Screen";
+            });
+          }
         });
 
         // Examples of listening to NAF events
