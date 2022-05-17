@@ -51,34 +51,32 @@ a {
 }
 
 /* Footer */
-#footer {
-  position: relative;
-  top: 4vw;
-}
-.footer-img {
+.middle {
   display: flex;
   justify-content: space-around;
-}
-.footer-img .dove-img,
-.footer-img .duck-img {
   position: relative;
   top: 2vw;
 }
-.footer-img .share-img {
-  width: 37vw;
+.middle .dove-img,
+.middle .duck-img {
+  width: 21vw;
+  height: 21vw;
+  display: block;
+}
+.middle .share-img {
+  position: relative;
+  display: block;
+  width: 38vw;
   border-radius: 1vw;
-  position: relative;
-  top: 2vw;
-  right: 1vw;
+  right: 2vw;
 }
 
 /* footer */
 .footer-form {
-  height: 5vw;
   background-color: #7190b5;
   display: flex;
   justify-content: center;
-  padding: 3.5vw;
+  padding: 1.5vw;
   color: #fff;
   line-height: 1.6;
 }
