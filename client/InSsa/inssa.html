@@ -172,7 +172,6 @@
       <!-- 메인 배경 -->
       <a-assets>
         <!-- navmesh -->
-
         <a-asset-item id="house" src="./assets/gltf/house.glb"></a-asset-item>
         <a-asset-item
           id="navmesh"
@@ -193,11 +192,14 @@
 
         <template id="avatar-template">
           <a-entity class="avatar" networked-audio-source scale="1 1 1">
+            <a-text value="quack" color="#000" rotation="0 180 0" position="1 5.5 0" scale="3 3 3"></a-text>
+            <a-text value="quack" color="#000" rotation="0 0 0" position="-1 5.5 0" scale="3 3 3"></a-text>
             <a-gltf-model
               id="myAvatar"
               src="./assets/gltf/mallardDuck.gltf"
               visible="true"
               animation-mixer="clip:null"
+              scale="2 2 2"
             ></a-gltf-model>
           </a-entity>
         </template>
@@ -205,11 +207,14 @@
         <!-- Player2. -->
         <template id="avatar-template2">
           <a-entity class="avatar" networked-audio-source scale="1 1 1">
+            <a-text value="gugu" color="#000" rotation="0 180 0" position="0.8 5.8 -2" scale="3 3 3"></a-text>
+            <a-text value="gugu" color="#000" rotation="0 0 0" position="-0.8 5.8 -2"  scale="3 3 3"></a-text>
             <a-gltf-model
               id="myAvatar"
               src="./assets/gltf/dove.gltf"
               visible="true"
               animation-mixer="clip:null"
+              scale="2 2 2"
             ></a-gltf-model>
           </a-entity>
         </template>
@@ -243,16 +248,16 @@
       <a-entity
         id="player"
         look-controls
-        position="17.325 1.863 82.049"
+        position="17.325 0.5 82.049"
         networked="template:#avatar-template;attachTemplateToLocal:true;"
         movement-controls="
         fly:false;
         constrainToNavMesh: true;
-        controls: keyboard, touch;
+        controls: keyboard;
         speed:0.5
         "
       >
-        <a-entity id="cam" camera position="0 3.6 5"> </a-entity>
+        <a-entity id="cam" camera position="0 7 6" rotation="-20 0 0"> </a-entity>
       </a-entity>
 
       <!-- Nav mesh. -->
@@ -265,7 +270,7 @@
 
       <!-- Scene. -->
       <a-entity position="0 0 0" gltf-model="#house"> </a-entity>
-
+      <a-sky color="#6EBAA7"></a-sky>
       <!-- Templates -->
     </a-scene>
 
@@ -379,11 +384,11 @@
             .getElementById("player")
             .setAttribute(
               "movement-controls",
-              "fly:false;constrainToNavMesh: true;controls:  trackpad, keyboard, touch;"
+              "fly:false;constrainToNavMesh: true;controls: keyboard;"
             );
           document
             .getElementById("player")
-            .setAttribute("position", "17.325 1.863 82.049");
+            .setAttribute("position", "17.325 0.5 82.049");
           document
             .querySelector("#player>#myAvatar")
             .setAttribute("animation-mixer", "clip: eat");
@@ -395,7 +400,7 @@
             .getElementById("player")
             .setAttribute(
               "movement-controls",
-              "fly:true;constrainToNavMesh: false;controls: trackpad, keyboard, touch;"
+              "fly:true;constrainToNavMesh: false;controls: keyboard;"
             );
           document
             .querySelector("#player>#myAvatar")
