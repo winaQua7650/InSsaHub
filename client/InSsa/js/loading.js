@@ -3,4 +3,4 @@ const loading = document.querySelector("#loading")
 setTimeout(() => {
   main.style.visibility="visible",
   loading.style.visibility="hidden"
-}, 5000);
+}, 7000);
