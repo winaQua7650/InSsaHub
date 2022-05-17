@@ -30,14 +30,14 @@ a {
   font-weight: 700;
 }
 .main .main-text .description-text {
-  padding-top: 3vw;
+  padding-top: 1vw;
   width: 40vw;
   height: 10vw;
   font-size: 1.5vw;
   line-height: 1.4;
 }
-.main .test-img {
-  width: 30vw;
+.main .hall-img {
+  width: 35vw;
   height: 20vw;
   display: block;
   border-radius: 1vw;
@@ -59,12 +59,56 @@ a {
   display: flex;
   justify-content: space-around;
 }
-.footer-img .test-img2 {
-  width: 40vw;
-  height: 20vw;
+.footer-img .dove-img,
+.footer-img .duck-img {
+  position: relative;
+  top: 2vw;
 }
-.footer-img .test-img3 {
-  width: 35vw;
-  height: 20vw;
+.footer-img .share-img {
+  width: 37vw;
   border-radius: 1vw;
+  position: relative;
+  top: 2vw;
+  right: 1vw;
+}
+
+/* footer */
+.footer-form {
+  height: 5vw;
+  background-color: #7190b5;
+  display: flex;
+  justify-content: center;
+  padding: 3.5vw;
+  color: #fff;
+  line-height: 1.6;
+}
+/* footer-left */
+.footer-form .left-area {
+  width: 22vw;
+  align-self: flex-end;
+}
+.footer-form .left-area .footer-logo {
+  font-size: 2vw;
+  font-weight: 700;
+}
+
+.footer-form .left-area .footer-developer {
+  font-size: 0.8vw;
+  font-weight: 700;
+}
+.footer-form .left-area .footer-sub-text {
+  font-size: 0.9vw;
+}
+
+/* footer-right */
+.footer-form .right-area {
+  width: 22vw;
+  align-self: flex-end;
+}
+
+.footer-form .right-area .tel,
+.footer-form .right-area .email,
+.footer-form .right-area .operating-time,
+.footer-form .right-area .footer-adress {
+  font-size: 0.8vw;
 }
