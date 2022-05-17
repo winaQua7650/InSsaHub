@@ -87,7 +87,7 @@
         }
         NAF.schemas.add({
           template: "#screen-template",
-          components: ["position"],
+          components: ["position", "rotation"],
         });
         const components = NAF.schemas.getComponentsOriginal(template);
         return components;
@@ -177,7 +177,10 @@
           id="navmesh"
           src="./assets/gltf/navmesh.glb"
         ></a-asset-item>
-
+        <img
+          id="sky"
+          src="https://live.staticflickr.com/65535/51955074777_8e5acd71fc_4k.jpg"
+        />
         <!-- 상호작용 공 -->
         <template id="sphere-template">
           <a-entity
@@ -192,11 +195,23 @@
 
         <template id="avatar-template">
           <a-entity class="avatar" networked-audio-source scale="1 1 1">
-            <a-text value="quack" color="#000" rotation="0 180 0" position="1 5.5 0" scale="3 3 3"></a-text>
-            <a-text value="quack" color="#000" rotation="0 0 0" position="-1 5.5 0" scale="3 3 3"></a-text>
+            <a-text
+              value="quack"
+              color="#000"
+              rotation="0 180 0"
+              position="1 5.5 0"
+              scale="3 3 3"
+            ></a-text>
+            <a-text
+              value="quack"
+              color="#000"
+              rotation="0 0 0"
+              position="-1 5.5 0"
+              scale="3 3 3"
+            ></a-text>
             <a-gltf-model
               id="myAvatar"
-              src="./assets/gltf/mallardDuck.gltf"
+              src="./assets/gltf/mallardDuck_2.gltf"
               visible="true"
               animation-mixer="clip:null"
               scale="2 2 2"
@@ -207,8 +222,20 @@
         <!-- Player2. -->
         <template id="avatar-template2">
           <a-entity class="avatar" networked-audio-source scale="1 1 1">
-            <a-text value="gugu" color="#000" rotation="0 180 0" position="0.8 5.8 -2" scale="3 3 3"></a-text>
-            <a-text value="gugu" color="#000" rotation="0 0 0" position="-0.8 5.8 -2"  scale="3 3 3"></a-text>
+            <a-text
+              value="gugu"
+              color="#000"
+              rotation="0 180 0"
+              position="0.8 5.8 -2"
+              scale="3 3 3"
+            ></a-text>
+            <a-text
+              value="gugu"
+              color="#000"
+              rotation="0 0 0"
+              position="-0.8 5.8 -2"
+              scale="3 3 3"
+            ></a-text>
             <a-gltf-model
               id="myAvatar"
               src="./assets/gltf/dove.gltf"
@@ -234,11 +261,13 @@
       <a-entity
         id="sphere"
         networked="template:#sphere-template;networkId:sphere;persistent:true;owner:scene"
+        position="29.111 6 23.813"
+        scale="6 6 6"
       ></a-entity>
 
       <a-entity
         id="wall-share"
-        networked="template:#screen-template;attachTemplateToLocal:false;streamName: screen"
+        networked="template:#screen-template;attachTemplateToLocal:true;streamName: screen"
         visible="true"
         position="-16.294 14.459 80.060"
         rotation="0 180 0"
@@ -257,7 +286,8 @@
         speed:0.5
         "
       >
-        <a-entity id="cam" camera position="0 7 6" rotation="-20 0 0"> </a-entity>
+        <a-entity id="cam" camera position="0 7 6" rotation="-20 0 0">
+        </a-entity>
       </a-entity>
 
       <!-- Nav mesh. -->
@@ -270,7 +300,8 @@
 
       <!-- Scene. -->
       <a-entity position="0 0 0" gltf-model="#house"> </a-entity>
-      <a-sky color="#6EBAA7"></a-sky>
+
+      <a-sky src="#sky"></a-sky>
       <!-- Templates -->
     </a-scene>
 
@@ -321,9 +352,6 @@
         // Handle screen button click (Off and On)
         screenBtnEle.addEventListener("click", function () {
           if (screenEnabled) {
-            document
-              .querySelector("#wall-share")
-              .setAttribute("material", "color:#FFF");
             NAF.connection.adapter.removeLocalMediaStream("screen");
             NAF.connection.adapter.screenEnabled = false;
             screenBtnEle.textContent = "Share Screen";
@@ -333,9 +361,6 @@
               console.log(NAF.connection.adapter);
               screenEnabled = true;
               screenBtnEle.textContent = "Stop Screen";
-              document
-                .querySelector("#wall-share")
-                .setAttribute("src", "#screen-template");
             });
           }
         });
