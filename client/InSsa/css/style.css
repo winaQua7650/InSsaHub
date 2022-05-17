@@ -17,10 +17,11 @@
 
 .button {
   cursor: pointer;
-  height: 40px;
-  width: 110px;
+  height: 3vw;
+  width: 8vw;
   border-radius: 30px;
-  margin-right: 12px;
+  margin-right: 1vw;
+  font-size: 1vw;
 }
 
 .controls {
@@ -57,12 +58,12 @@
   transform: scale(1.1);
 }
 
-/* .w-btn-neon2:hover::after {
+.w-btn-neon2:hover::after {
   content: "";
   width: 30px;
   height: 30px;
   border-radius: 100%;
-  border: 6px solid #00ffcb;
+  border: 6px solid #7190b5;
   position: absolute;
   z-index: -1;
   top: 50%;
@@ -82,4 +83,4 @@
       height: 40px;
       opacity: 0;
   }
-} */
+}
