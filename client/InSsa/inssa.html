@@ -7,8 +7,6 @@
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     <!-- socket -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.4.0/socket.io.slim.js"></script>
-    <!-- aframe-environment -->
-    <script src="https://unpkg.com/aframe-environment-component@1.3.0/dist/aframe-environment-component.min.js"></script>
     <!-- easyrtc -->
     <script src="/easyrtc/easyrtc.js"></script>
     <!-- networked-aframe -->
@@ -40,7 +38,7 @@
               .querySelector("#player")
               .setAttribute(
                 "networked",
-                "template:#avatar-template2;attachTemplateToLocal:false;"
+                "template:#avatar-template2;attachTemplateToLocal:true;"
               );
             NAF.schemas.add({
               template: "#avatar-template",
@@ -48,9 +46,9 @@
                 "position",
                 "rotation",
                 {
-                  selector: ".head",
-                  component: "material",
-                  property: "color",
+                  selector: "#myAvatar",
+                  component: "animation-mixer",
+                  property: "clip",
                 },
               ],
             });
@@ -59,7 +57,7 @@
               .querySelector("#player")
               .setAttribute(
                 "networked",
-                "template:#avatar-template;attachTemplateToLocal:false;"
+                "template:#avatar-template;attachTemplateToLocal:true;"
               );
             NAF.schemas.add({
               template: "#avatar-template2",
@@ -67,9 +65,9 @@
                 "position",
                 "rotation",
                 {
-                  selector: ".head",
-                  component: "material",
-                  property: "color",
+                  selector: "#myAvatar",
+                  component: "animation-mixer",
+                  property: "clip",
                 },
               ],
             });
@@ -88,7 +86,7 @@
           });
         }
         NAF.schemas.add({
-          template: "screen-template",
+          template: "#screen-template",
           components: ["position"],
         });
         const components = NAF.schemas.getComponentsOriginal(template);
@@ -170,15 +168,16 @@
     "
       cursor="rayOrigin: mouse"
       raycaster="objects:.raycastable"
-      environment="preset: forest; lighting: point; lightPosition: -5 10 0;"
     >
-      <!-- 건축물 -->
+      <!-- 메인 배경 -->
       <a-assets>
+        <!-- navmesh -->
+
+        <a-asset-item id="house" src="./assets/gltf/house.glb"></a-asset-item>
         <a-asset-item
           id="navmesh"
-          src="./assets/gltf/Castle-navmesh.glb"
+          src="./assets/gltf/navmesh.glb"
         ></a-asset-item>
-        <a-asset-item id="castle" src="./assets/gltf/Castle.glb"></a-asset-item>
 
         <!-- 상호작용 공 -->
         <template id="sphere-template">
@@ -193,22 +192,24 @@
         <!-- Player1. -->
 
         <template id="avatar-template">
-          <a-entity class="avatar" networked-audio-source \ scale="0.3 0.3 0.3">
+          <a-entity class="avatar" networked-audio-source scale="1 1 1">
             <a-gltf-model
               id="myAvatar"
               src="./assets/gltf/mallardDuck.gltf"
               visible="true"
+              animation-mixer="clip:null"
             ></a-gltf-model>
           </a-entity>
         </template>
 
         <!-- Player2. -->
         <template id="avatar-template2">
-          <a-entity class="avatar" networked-audio-source scale="0.3 0.3 0.3">
+          <a-entity class="avatar" networked-audio-source scale="1 1 1">
             <a-gltf-model
               id="myAvatar"
               src="./assets/gltf/dove.gltf"
               visible="true"
+              animation-mixer="clip:null"
             ></a-gltf-model>
           </a-entity>
         </template>
@@ -218,8 +219,7 @@
             id="screen-plane"
             width="12"
             height="9"
-            position="0 7 -0.001"
-            material="side: back"
+            scale="2.2 2 2"
             networked-video-source="streamName: screen"
           ></a-plane>
         </template>
@@ -232,22 +232,27 @@
       ></a-entity>
 
       <a-entity
-        networked="template:#screen-template;attachTemplateToLocal:false"
-        visible="false"
+        id="wall-share"
+        networked="template:#screen-template;attachTemplateToLocal:false;streamName: screen"
+        visible="true"
+        position="-16.294 14.459 80.060"
+        rotation="0 180 0"
       ></a-entity>
+
       <!-- Player entity. -->
       <a-entity
         id="player"
         look-controls
-        networked=""
+        position="17.325 1.863 82.049"
+        networked="template:#avatar-template;attachTemplateToLocal:true;"
         movement-controls="
         fly:false;
         constrainToNavMesh: true;
-        controls: checkpoint, gamepad, trackpad, keyboard, touch;"
+        controls: keyboard, touch;
+        speed:0.5
+        "
       >
-        <a-entity id="cam" camera position="0 1.6 0">
-          <a-cursor></a-cursor>
-        </a-entity>
+        <a-entity id="cam" camera position="0 3.6 5"> </a-entity>
       </a-entity>
 
       <!-- Nav mesh. -->
@@ -259,7 +264,7 @@
       ></a-entity>
 
       <!-- Scene. -->
-      <a-entity position="0 0 0" scale="3 3 3" gltf-model="#castle"> </a-entity>
+      <a-entity position="0 0 0" gltf-model="#house"> </a-entity>
 
       <!-- Templates -->
     </a-scene>
@@ -267,7 +272,7 @@
     <div class="actions">
       <button id="mic-btn" type="button" class="button">Mute Mic</button>
       <button id="screen-btn" type="button" class="button">Share screen</button>
-      <button id="fly-btn" type="button" class="button">Fly Off</button>
+      <button id="fly-btn" type="button" class="button">Fly On</button>
     </div>
 
     <script>
@@ -311,14 +316,21 @@
         // Handle screen button click (Off and On)
         screenBtnEle.addEventListener("click", function () {
           if (screenEnabled) {
+            document
+              .querySelector("#wall-share")
+              .setAttribute("material", "color:#FFF");
             NAF.connection.adapter.removeLocalMediaStream("screen");
-            screenEnabled = false;
+            NAF.connection.adapter.screenEnabled = false;
             screenBtnEle.textContent = "Share Screen";
           } else {
             navigator.mediaDevices.getDisplayMedia().then((stream) => {
               NAF.connection.adapter.addLocalMediaStream(stream, "screen");
+              console.log(NAF.connection.adapter);
               screenEnabled = true;
               screenBtnEle.textContent = "Stop Screen";
+              document
+                .querySelector("#wall-share")
+                .setAttribute("src", "#screen-template");
             });
           }
         });
@@ -362,26 +374,33 @@
             .fly == true
         ) {
           console.log("비행비활성화");
-          flyBtnEle.textContent = "Fly Off";
-          document
-            .getElementById("player")
-            .setAttribute(
-              "movement-controls",
-              "fly:false;constrainToNavMesh: true;controls: checkpoint, gamepad, trackpad, keyboard, touch;"
-            );
-          document.getElementById("player").setAttribute("position", "-7 0 1");
-        } else {
-          console.log("비행활성화");
           flyBtnEle.textContent = "Fly On";
           document
             .getElementById("player")
             .setAttribute(
               "movement-controls",
-              "fly:true;constrainToNavMesh: false;controls: checkpoint, gamepad, trackpad, keyboard, touch;"
+              "fly:false;constrainToNavMesh: true;controls:  trackpad, keyboard, touch;"
             );
-          console.log(document.querySelector("#avatar-template2").innerHTML);
-          document.querySelector("#avatar-template2").innerHTML =
-            "<a-entity class='avatar' networked-audio-source='' scale='0.3 0.3 0.3'> <a-gltf-model id='myAvatar' src='./assets/gltf/dove.gltf' visible='true' animation-mixer='clip:fly'></a-gltf-model></a-entity>";
+          document
+            .getElementById("player")
+            .setAttribute("position", "17.325 1.863 82.049");
+          document
+            .querySelector("#player>#myAvatar")
+            .setAttribute("animation-mixer", "clip: eat");
+          console.log(document.querySelector("#player>#myAvatar"));
+        } else {
+          console.log("비행활성화");
+          flyBtnEle.textContent = "Fly Off";
+          document
+            .getElementById("player")
+            .setAttribute(
+              "movement-controls",
+              "fly:true;constrainToNavMesh: false;controls: trackpad, keyboard, touch;"
+            );
+          document
+            .querySelector("#player>#myAvatar")
+            .setAttribute("animation-mixer", "clip: fly");
+          console.log(document.querySelector("#player>#myAvatar"));
         }
       });
     </script>
