@@ -2,16 +2,26 @@
   position: absolute;
   display: flex;
   bottom: 3%;
-  left: 3%;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
-.button {
+/* .button {
   cursor: pointer;
   background: #fff;
   height: 40px;
   width: 130px;
   border-radius: 30px;
   margin-right: 10px;
+} */
+
+.button {
+  cursor: pointer;
+  height: 3vw;
+  width: 8vw;
+  border-radius: 30px;
+  margin-right: 1vw;
+  font-size: 1vw;
 }
 
 .controls {
@@ -31,4 +41,46 @@
 
 #main-scene {
   visibility: hidden;
+}
+
+/*button*/
+.w-btn-neon2 {
+  position: relative;
+  background: white;
+  border-radius: 1000px;
+  color: darkslategray;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.w-btn-neon2:hover {
+  transform: scale(1.1);
+}
+
+.w-btn-neon2:hover::after {
+  content: "";
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  border: 6px solid #7190b5;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ring 1.5s infinite;
+}
+
+@keyframes ring {
+  0% {
+      width: 10px;
+      height: 10px;
+      opacity: 1;
+  }
+  100% {
+      width: 40px;
+      height: 40px;
+      opacity: 0;
+  }
 }
