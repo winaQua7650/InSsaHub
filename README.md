@@ -70,7 +70,7 @@ git clone https://lab.ssafy.com/s06-final/S06P31S103.git
 ```bash
 cd client
 npm i
-npm run dev
+npm start
 ```
 
 
