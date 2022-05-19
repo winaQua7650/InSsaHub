@@ -10,12 +10,13 @@
     <img alt="A-Frame" src ="https://img.shields.io/badge/AFrame-EF2D5E.svg?&style=for-the-badge&logo=A-Frame&logoColor=white"/><img alt="HTML5" src ="https://img.shields.io/badge/HTML5-E34F26.svg?&style=for-the-badge&logo=HTML5&logoColor=white"/><img alt="CSS3" src ="https://img.shields.io/badge/CSS3-1572B6.svg?&style=for-the-badge&logo=CSS3&logoColor=white"/><img alt="JavaScript" src ="https://img.shields.io/badge/JavaScript-F7DF1E.svg?&style=for-the-badge&logo=JavaScript&logoColor=white"/><img alt="jQuery" src ="https://img.shields.io/badge/jQuery-0769AD.svg?&style=for-the-badge&logo=jQuery&logoColor=white"/>
     <h5> 💻 Back-End 💻 </h5>
     <img alt="Node.js" src ="https://img.shields.io/badge/Node.js-339933.svg?&style=for-the-badge&logo=Node.js&logoColor=white"/><img alt="Express.js" src ="https://img.shields.io/badge/Express.js-000000.svg?&style=for-the-badge&logo=Express.js&logoColor=white"/>
+    <h5> 📢 Collaboration 📢 </h5>
+    <img alt="GitLab" src ="https://img.shields.io/badge/GitLab-FC6D26.svg?&style=for-the-badge&logo=GitLab&logoColor=white"/> <img alt="Jira" src ="https://img.shields.io/badge/Jira Software-0052CC.svg?&style=for-the-badge&logo=Jira Software&logoColor=white"/> <img alt="Notion" src ="https://img.shields.io/badge/Notion-000000.svg?&style=for-the-badge&logo=Notion&logoColor=white"/> <img alt="Mattermost" src ="https://img.shields.io/badge/Mattermost-0058CC.svg?&style=for-the-badge&logo=Mattermost&logoColor=white"/>
 </div>
 
+<br />
 
-
-
-
+<br />
 
 ## 📑 목차
 
@@ -27,9 +28,9 @@
 4. 구현 기능
 5. 팀원 소개
 
+<br />
 
-
-
+<br />
 
 ## 1. 서비스 소개
 
@@ -53,9 +54,7 @@
 
 👉 사용자의 아바타의 특정 상태에 따른 애니메이션 구현
 
-
-
-
+<br /><br />
 
 ## 2. 코드 실행 방법
 
@@ -73,9 +72,9 @@ npm i
 npm start
 ```
 
+<br />
 
-
-
+<br />
 
 ## 3. 기술 스택 및 개발 환경
 
@@ -100,9 +99,9 @@ Commit message Rule
 | Refactor | 코드 리팩터링할 경우          |                                |
 | Merge    | 상위 브랜치로 Merge 하는 경우 | merge from release into master |
 
+<br />
 
-
-
+<br />
 
 ## 4. 구현 기능
 
@@ -132,13 +131,13 @@ Commit message Rule
 
 ![flyAnimation](./assets/flyAnimation.gif)
 
-#### 7️⃣ Screen Share
+#### 7️⃣ 화면 공유
 
 ![screenShare](./assets/screenShare.gif)
 
+<br />
 
-
-
+<br />
 
 ## 5. 팀원 소개
 
