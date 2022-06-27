@@ -58,3 +58,7 @@ examples/dist
 
 # Webstorm
 /.idea/*
+
+InSsa/assets
+dist/
+
